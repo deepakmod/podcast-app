@@ -53,7 +53,8 @@ function CreateEpisode(props) {
             setAudioFile(null);
        }
        catch(err){
-            toast.error(err.message);
+            console.error(err.message);
+            toast.error("Something went wrong");
             setLoading(false);
        }
     

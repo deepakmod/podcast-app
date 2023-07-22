@@ -6,27 +6,30 @@ import ProfileNav from './../../components/ProfileNav/ProfileNav';
 import { FiEdit} from 'react-icons/fi'; 
 import { MdModeEdit} from 'react-icons/md'; 
 import Button from '../../components/Button';
-import { collection, doc, getDoc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from '../../firebase';
 import { toast } from 'react-toastify';
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, signOut } from "firebase/auth";
 import { setUser } from '../../slices/userSlice';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Profile(props) {
     const user = useSelector(state=>state.user.user);
     const [name,setName] = useState('');
     const [profileImage, setProfileImage] = useState(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() =>{
         if(user && profileImage) 
             updateProfilePicture();
-    },[user,profileImage]);
+    },[profileImage]);
 
     async function updateProfilePicture(){
         try{
+            console.log(false);
             const profileImageRef = ref(storage,`profile-picture/${user.uid}/${Date.now()}`);
             await uploadBytes(profileImageRef, profileImage);
             const uploadImageUrl = await getDownloadURL(profileImageRef);
@@ -50,6 +53,9 @@ function Profile(props) {
 
 
     async function updateUserName(){
+        if(name.trim()===''){
+            return;
+        }
         try{
             const docRef = doc(db, "users", user.uid);
             await updateDoc(docRef, {
@@ -86,11 +92,17 @@ function Profile(props) {
         return <Loader />;
     }
 
-    console.log(name)
-
     return (
         <div className='profile-background'>
-            <ProfileNav />
+            <ProfileNav>
+                <Button text='Logout' handleClick={()=>{
+                    signOut(auth)
+                    .then(() =>{toast.success("Signed out successfully")})
+                    .catch((error) =>{console.error(error)});
+                }} />
+                <Button text='Podcasts' handleClick={()=>{navigate('/podcasts')}}   />
+                <Button text='Start A Podcast' handleClick={()=>{navigate('/create_podcast')}}   />
+            </ProfileNav>
             <div className='profile-container' >
                 <div className='img-banner' >  
                     <span className='pencil-icon'> <MdModeEdit /> </span>

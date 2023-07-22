@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from './firebase';
 import { onSnapshot , doc} from 'firebase/firestore';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from './slices/userSlice';
 import Loader from './components/Loader/Loader';
 import PrivateRouters from './components/PrivateRouters';
@@ -19,7 +19,6 @@ import CreateEpisode from './pages/create-episode/CreateEpisode';
 import ResetPassword from './pages/reset-password/ResetPassword';
 function App() {
 
-  const user = useSelector(state=> state.user.user);
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -41,6 +40,7 @@ function App() {
           },
           (error)=>{
             console.error("Error Fetching user data", error);
+            toast.error("Something went wrong");
           }
         );
 
@@ -53,7 +53,7 @@ function App() {
     return ()=>{
       unsubscribeAuth();
     }
-  },[user]);
+  },[]);
 
 
   return (

@@ -1,15 +1,7 @@
 import React from 'react';
-import Button from '../Button';
 import './style.css';
-
 import { AiOutlineMenu } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase';
-import { toast } from 'react-toastify';
 function ProfileNav(props) {
-
-    const navigate= useNavigate();
 
     return (
         <nav className='podcast-nav'>
@@ -20,13 +12,7 @@ function ProfileNav(props) {
                 e.stopPropagation();
             }} ><AiOutlineMenu style={{width:'100%',height:'100%'}} /></div>
             <div className='nav-buttons'>
-                <Button text='Logout' handleClick={()=>{
-                    signOut(auth)
-                    .then(() =>{toast.success("Signed out successfully")})
-                    .catch((error) =>{console.error(error)});
-                }} />
-                <Button text='Podcasts' handleClick={()=>{navigate('/podcasts')}}   />
-                <Button text='Start A Podcast' handleClick={()=>{navigate('/create_podcast')}}   />
+                {props.children}
             </div>
         </nav>
     );

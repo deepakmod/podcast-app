@@ -53,6 +53,7 @@ function Login(props) {
                 name: userData.name,
                 email: email,
                 uid: user.uid,
+                profilePicture: userData.profilePicture,
             }));
             toast.success("You have been successfully Logged in");
             setLoading(false);

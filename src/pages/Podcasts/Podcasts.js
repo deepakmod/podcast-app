@@ -6,13 +6,16 @@ import { setPodcasts} from '../../slices/podcastSlice';
 import PodcastCard from '../../components/PodcastCard/PodcastCard';
 import './style.css';
 import Input from '../../components/Input';
-import NavBar from '../../components/NavBar.js/NavBar';
+import ProfileNav from '../../components/ProfileNav/ProfileNav';
 import { responsiveNav } from '../../slices/responsiveSlice';
+import Button from '../../components/Button';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 function Podcasts(props) {
 
     const [search , setSearch] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const podcasts = useSelector((state)=>state.podcasts.podcasts);
     useEffect(() =>{
         const unsubscribe = onSnapshot(
@@ -25,6 +28,7 @@ function Podcasts(props) {
                 dispatch(setPodcasts(podcastData));
             },
             (error)=>{
+                toast.error("Something went wrong");
                 console.error(error);
             }
         );
@@ -33,20 +37,6 @@ function Podcasts(props) {
         }
     },[dispatch]);
 
-    
-
-    async function handleDelete(id){
-        try{
-            await deleteDoc(doc(db, "podcasts", id));
-            toast.success("Podcast deleted successfully");
-        }
-        catch(error){
-            console.error(error.message);
-            toast.error("something went wrong");
-        }
-    }
-
-
 
     let filteredPodcasts = podcasts.filter(podcast =>podcast.title.trim().toLowerCase().includes(search.trim().toLowerCase()));
 
@@ -54,10 +44,13 @@ function Podcasts(props) {
         <div className='podcasts'
             onClick={(e)=>{
                 dispatch(responsiveNav());
-
             }}
         >
-           <NavBar /> 
+           <ProfileNav>
+                <Button text='Signup' handleClick={()=>{navigate('/')}} />
+                <Button text='Profile' handleClick={()=>{navigate('/profile')}}   />
+                <Button text='Start A Podcast' handleClick={()=>{navigate('/create_podcast')}}   />     
+           </ProfileNav>
             <div className='podcast-body'>
                 <Input type="input" placeholder='Search by Title' setData={setSearch} />
             {

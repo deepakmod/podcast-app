@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { auth, db } from '../../firebase';
 import { collection, doc, getDoc, onSnapshot, query } from 'firebase/firestore';
-import NavBar from './../../components/NavBar.js/NavBar';
 import './style.css';
 import Button from './../../components/Button';
 import { toast } from 'react-toastify';
 import EpisodeDetails from '../../components/EpisodeDetails';
 import AudioPlayer from '../../components/AudioPlayer/AudioPlayer';
+import ProfileNav from '../../components/ProfileNav/ProfileNav';
 
 
 function PodcastDetails(props) {
@@ -51,6 +51,7 @@ function PodcastDetails(props) {
             }
         }
         catch(err){
+            console.error(err.message);
            toast.error("something went wrong, please try again!");
         }
 
@@ -58,7 +59,11 @@ function PodcastDetails(props) {
 
     return (
         <div className='podcast-detail'>
-            <NavBar/>
+            <ProfileNav>
+                <Button text='Profile' handleClick={()=>{navigate('/profile')}}   />
+                <Button text='Podcasts' handleClick={()=>{navigate('/podcasts')}}   />
+                <Button text='Start A Podcast' handleClick={()=>{navigate('/create_podcast')}}   />
+            </ProfileNav>
             <div className='detail-container' >
                 <div className='podcast-button'>
                     <h1>{podcast.title}</h1>

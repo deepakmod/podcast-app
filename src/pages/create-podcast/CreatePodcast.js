@@ -61,6 +61,7 @@ function CreatePodcast(props) {
         setLoading(false);
        }
        catch(error){
+        toast.error("Something went wrong");
         console.error(error);
         setLoading(false);
        }
