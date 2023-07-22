@@ -1,0 +1,106 @@
+.podcast-detail{ 
+    background-image: url('../images/background.jpg');
+    color :white;
+    min-height: 100vh;
+}
+
+.podcast-detail h1{
+    margin: 0;
+}
+
+.detail-container{
+    padding: 3rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bannerImg{
+    height: 35vh;
+    border-radius: 2.5rem;
+    border: .5rem solid rgb(70,74,83);
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.bannerImg img{
+    border-radius: 2rem;
+    height: 100%;
+    width: 100%;
+}
+
+.bannerImg>p{
+    padding: .5rem 1rem;
+    font-size: .9rem;
+}
+
+.bannerImg>h1{
+    padding: 0 1rem;
+}
+
+.podcast-button{
+    padding: .5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.podcast-button>button{
+    padding: .5rem 2.2rem;
+    color: white;
+    background-color: transparent;
+    border-radius: 1rem;
+    border: 1px solid;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.ep-container{
+    flex-direction: column;
+    gap: .6rem;
+}
+
+.episode{
+    padding: 1rem 1.5rem;
+}
+
+.episode-para{
+    padding: 0 1.5rem;
+    padding-right: 0;
+}
+
+.episode-para button{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+}
+
+@media only screen and (max-width: 800px){
+    .detail-container{
+        padding: 1rem 2rem;
+    }
+
+    .detail-container h1{
+        font-size: 1rem;
+    }
+
+    .detail-container p{
+        font-size: .7rem;
+    }
+
+    .podcast-button>button{
+        padding: .5rem;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .detail-container{
+        padding: 1rem;
+    }
+
+    .episode{
+        padding: 0;
+    }
+}

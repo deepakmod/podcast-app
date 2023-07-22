@@ -1,0 +1,126 @@
+.profile-background{
+    background-image: url(../images/background.jpg);
+    width: 100%;
+    height: 100vh;
+}
+
+.profile-container{
+    margin: 3rem auto;
+    width: 50%;
+}
+
+.img-banner{
+    height: 30vh;
+    border-radius: 2rem;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.img-banner>.banner-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+}
+
+.pencil-icon{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.profile-img{
+    left: 0;
+    right: 0;
+    position: absolute;
+    top:40%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-img>.img{
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.user-details{
+    position: relative;
+    border-radius: 2rem;
+    background-color: rgba(3, 5, 12,.5);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    margin: 2rem 0 1rem 0;
+    padding: 2rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-details>.data{
+    color: rgb(106,117,117);
+    height:  2rem;
+    background-color: transparent;
+    font-size: 1.3rem;
+    border: none;
+    border-bottom: 1px solid rgb(106,117,117);
+    text-align: center;
+}
+
+.edit-icon{
+    cursor: pointer;
+    color: gray;
+    position: absolute;
+    font-size: 1rem;
+    border: none;
+    right: 2rem;
+    top: 1rem;
+}
+
+.user-details button{
+    flex-grow: 1;
+    color: gray;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: none;
+}
+
+@media only screen and (max-width: 1006px){
+    .profile-container{
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 605px){
+    .profile-container{
+        width: 90%;
+    }
+    .editable{
+        display: none;
+    }
+    .profile-container{
+        margin: 1rem auto;
+    }
+}
+
+@media only screen and (max-width: 305px){
+    .user-details>.data{
+        padding: 1px 0;
+        border: none;
+        outline: none;
+    }
+    .profile-container{
+        width: 100%;
+    }
+}
