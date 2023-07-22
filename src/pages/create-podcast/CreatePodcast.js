@@ -59,6 +59,7 @@ function CreatePodcast(props) {
         setBannerImage(null);
         setDisplayImage(null);
         setLoading(false);
+        navigate('/podcasts');
        }
        catch(error){
         toast.error("Something went wrong");
@@ -88,9 +89,9 @@ function CreatePodcast(props) {
 
                     <Input type="text" placeholder='Description' value={description} setData={setDescription} />
 
-                    <InputFile id='displayImg' accept={'images/*'} class='inputFile' text="Select Dispaly Image" data={displayImage}  handleFiles={setDisplayImage} />
+                    <InputFile id='displayImg' accept={'image/*'} class='inputFile' text="Select Dispaly Image" data={displayImage}  handleFiles={setDisplayImage} />
 
-                    <InputFile id='bannerImg' accept={'images/*'} class='inputFile' text="Select Banner Image" data={bannerImage}   handleFiles={setBannerImage} />
+                    <InputFile id='bannerImg' accept={'image/*'} class='inputFile' text="Select Banner Image" data={bannerImage}   handleFiles={setBannerImage} />
 
                     {errorMessage && <p className='error'>{errorMessage}</p>}
 

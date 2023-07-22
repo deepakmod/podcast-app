@@ -51,6 +51,7 @@ function CreateEpisode(props) {
             setTitle('');
             setDescription('');
             setAudioFile(null);
+            navigate('/podcasts');
        }
        catch(err){
             console.error(err.message);

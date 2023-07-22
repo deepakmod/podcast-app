@@ -67,7 +67,7 @@ function Profile(props) {
                 uid: user.uid,
                 profilePicture : user.profilePicture
             }));
-            toast.success('user updated successfully');
+            toast.success('Profile updated successfully');
         }
         catch(error){
             toast.err('Something went wrong');
@@ -121,10 +121,15 @@ function Profile(props) {
                 </div>
 
                 <div className='user-details' >
-                    <div className='edit-icon' >
-                        <span className='editable'>Edit Profile</span>  <FiEdit /> 
+                    <div className='edit-icon'
+                    onClick={()=>{
+                        const username=document.getElementById('username');
+                        username.focus();
+                    }}
+                    >
+                        <span className='editable' >Edit Profile</span>  <FiEdit /> 
                     </div>
-                    <input type='text' className='data' onChange={(e)=>{setName(e.target.value)}}  placeholder={ user.name } />
+                    <input type='text' id='username' className='data'  onChange={(e)=>{setName(e.target.value)}}  placeholder={ user.name }/>
                     <div className='data' >{user.email}</div>
                     <div>
                         <Button text='Reset Password' handleClick={updatePassword} />

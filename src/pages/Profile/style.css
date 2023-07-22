@@ -68,13 +68,12 @@
     gap: 1rem;
 }
 
-.user-details>.data{
+.data{
     color: rgb(106,117,117);
     height:  2rem;
     background-color: transparent;
     font-size: 1.3rem;
     border: none;
-    border-bottom: 1px solid rgb(106,117,117);
     text-align: center;
 }
 
@@ -103,6 +102,9 @@
 }
 
 @media only screen and (max-width: 605px){
+    .data{
+        font-size: .9rem;
+    }
     .profile-container{
         width: 90%;
     }
@@ -115,7 +117,7 @@
 }
 
 @media only screen and (max-width: 305px){
-    .user-details>.data{
+    .data{
         padding: 1px 0;
         border: none;
         outline: none;

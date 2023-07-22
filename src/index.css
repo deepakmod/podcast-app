@@ -4,3 +4,7 @@ body {
   padding: 0;
   font-family: 'Inter', sans-serif;
 }
+
+span>svg{
+  cursor: pointer;
+}
