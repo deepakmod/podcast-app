@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { onSnapshot , collection, query, deleteDoc, doc} from 'firebase/firestore';
+import { onSnapshot , collection, query} from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPodcasts} from '../../slices/podcastSlice';

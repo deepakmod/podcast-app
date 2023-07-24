@@ -6,7 +6,7 @@ import ProfileNav from './../../components/ProfileNav/ProfileNav';
 import { FiEdit} from 'react-icons/fi'; 
 import { MdModeEdit} from 'react-icons/md'; 
 import Button from '../../components/Button';
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from '../../firebase';
 import { toast } from 'react-toastify';
 import { getAuth, sendPasswordResetEmail, signOut } from "firebase/auth";
@@ -14,11 +14,13 @@ import { setUser } from '../../slices/userSlice';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PodcastCard from '../../components/PodcastCard/PodcastCard';
 
 function Profile(props) {
     const user = useSelector(state=>state.user.user);
     const [name,setName] = useState('');
     const [profileImage, setProfileImage] = useState(null);
+    const [userPodcasts,setUserPodcasts] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -51,6 +53,26 @@ function Profile(props) {
         }
     }
 
+    useEffect(() =>{
+        const unsubscribe = onSnapshot(
+            query(collection(db, "podcasts")),
+            (querySnapshot)=>{
+                const podcastData = [];
+                querySnapshot.forEach((doc)=>{
+                    podcastData.push({id:doc.id , ...doc.data()});
+                });
+                let filteredPodcasts = podcastData.filter((podcast)=>(podcast.createdBy === auth.currentUser.uid));
+                setUserPodcasts(filteredPodcasts);
+            },
+            (error)=>{
+                toast.error("Something went wrong");
+                console.error(error);
+            }
+        );
+        return ()=>{
+            unsubscribe();
+        }
+    },[dispatch]);
 
     async function updateUserName(){
         if(name.trim()===''){
@@ -136,6 +158,14 @@ function Profile(props) {
                         <Button text='Save Name' handleClick={updateUserName} />
                     </div>
                 </div>
+
+                {(userPodcasts)?
+                <div className='user-podcasts' >
+                    {userPodcasts.map((podcast,index)=>
+                    <PodcastCard key={index} id={podcast.id}  title={podcast.title} description={podcast.description} imgSrc={podcast.displayImage}  />)}
+                </div>
+                :<></>}
+                
 
             </div>
         </div>
